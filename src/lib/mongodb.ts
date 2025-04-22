@@ -1,9 +1,10 @@
-// lib/mongodb.ts
 import mongoose from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URI;
+declare global {
+  var mongoose: { conn: mongoose.Mongoose | null };
+}
 
-console.log(MONGODB_URI);
+const MONGODB_URI = process.env.MONGODB_URI;
 
 if (!MONGODB_URI) {
   throw new Error(
@@ -19,6 +20,10 @@ if (!cached) {
 
 async function connectMongo() {
   if (cached.conn) return cached.conn;
+
+  if (typeof MONGODB_URI !== "string") {
+    return;
+  }
 
   cached.conn = await mongoose.connect(MONGODB_URI);
   return cached.conn;

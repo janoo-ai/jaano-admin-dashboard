@@ -9,12 +9,22 @@ import React, {
   ReactNode,
 } from "react";
 
+type Plan = {
+  createdAt: string;
+  expiredAt: string;
+  type: string;
+};
+
 type User = {
   _id: string;
   email: string;
-  plan: { type: string };
+  userId: string;
+  plan: Plan;
   status: "active" | "inactive";
   createdAt: string;
+  updatedAt: string;
+  crawl_domains: [];
+  paymentHistory: [];
 };
 
 type UserContextType = {

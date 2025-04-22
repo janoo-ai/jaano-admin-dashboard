@@ -6,6 +6,7 @@ import { HiCpuChip } from "react-icons/hi2";
 import { Card, CardContent } from "@/components/ui/card";
 import { useBotContext } from "@/context/BotContext";
 import AdminSideBae from "@/app/_compnanad/AdminSideBae";
+import Image from "next/image";
 
 const Page = () => {
   const { selectedBot } = useBotContext();
@@ -134,9 +135,11 @@ const Page = () => {
                   className="p-3 bg-white rounded-md border border-gray-200 shadow-sm space-y-1">
                   <p className="text-sm font-medium text-gray-700">{label}</p>
 
-                  {isImageUrl ? (
-                    <img
+                  {isImageUrl && typeof value === "string" ? (
+                    <Image
                       src={value}
+                      height={600}
+                      width={800}
                       alt={label}
                       className="w-16 h-16 object-contain border rounded"
                     />
